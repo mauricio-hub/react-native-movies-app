@@ -1,4 +1,5 @@
- import axios, { AxiosInstance } from 'axios';
+import { REACT_THE_MOVIE_DB_KEY } from "@env";
+import axios, { AxiosInstance } from 'axios';
 import { HttpAdapter } from './http.adapter';
 
 interface Options {
@@ -25,7 +26,7 @@ export class AxiosAdapter implements HttpAdapter {
       const fullUrl = `${this.axiosInstance.defaults.baseURL}${url}`; 
       // Combina los parámetros predeterminados con los parámetros opcionales
       const params = {
-        api_key: '',
+        api_key: REACT_THE_MOVIE_DB_KEY,
         language: 'es',
         ...options,
       };
