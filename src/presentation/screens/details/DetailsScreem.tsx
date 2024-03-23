@@ -6,20 +6,17 @@ import { useSingleMovie } from "../../hooks/useSingleMovie";
 import { MovieHeader } from "../../components/singleMovie/MovieHeader";
 import { MovieDetails } from "../../components/singleMovie/MovieDetails";
 import { ScrollView } from "react-native-gesture-handler";
+import { FullScreemLoaders } from "../../components/loaders/FullScreemLoaders";
 
 interface Props extends StackScreenProps<RootStackParams, "Details"> {}
 
 export const DetailsScreen = ({ route }: Props) => {
   const { movieId } = route.params;
 
-  const { loading, movie } = useSingleMovie(movieId);
+  const { loading, movie,cast=[]} = useSingleMovie(movieId);
 
   if (loading) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <FullScreemLoaders />;
   }
 
   return (
@@ -31,7 +28,7 @@ export const DetailsScreen = ({ route }: Props) => {
         title={movie!.title}
       />
 
-      <MovieDetails movie={movie!} />
+      <MovieDetails movie={movie!}  cast={cast}/>
     </ScrollView>
   );
 };
